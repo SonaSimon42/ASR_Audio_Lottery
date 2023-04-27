@@ -1,7 +1,4 @@
-# Audio Lottery on Conformer
-
-Our implementation is mainly based on [Efficient Conformer](https://github.com/burchim/EfficientConformer). 
-Please find more details about the dependency and usage of the code at the original repo.
+# The Implementation of Audio Lottery on Conformer by the Authors
 
 ## Installation
 
