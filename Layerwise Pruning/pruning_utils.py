@@ -26,19 +26,19 @@ def pruning_model(model, px):
     prune.global_unstructured(
         initial_layers,
         pruning_method=prune.L1Unstructured,
-        amount=px*0.67,
+        amount=px*1.1,
     )
 
     prune.global_unstructured(
         middle_layers,
         pruning_method=prune.L1Unstructured,
-        amount=px*0.22,
+        amount=px*1,
     )
 
     prune.global_unstructured(
         final_layers,
         pruning_method=prune.L1Unstructured,
-        amount=px*0.11,
+        amount=px*0.9,
     )
 
 def prune_model_custom(model, mask_dict):
