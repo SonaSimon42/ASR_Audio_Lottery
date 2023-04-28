@@ -17,7 +17,7 @@ Link: [Audio Lottery: Speech Recognition Made Ultra-Lightweight, Noise-Robust, a
 
 * **[Decaying Pruning](https://github.com/SonaSimon42/ASR_Audio_Lottery/tree/main/Decaying%20Pruning)**:
 
-  * The LTH algorithm does iterative pruning with the pruning percentage d, contstant throughout the iterations. In this hacker role, we experiment decaying pruning to obtain better winning tickets (or sparse network) of the model.
+  * The LTH algorithm does iterative pruning with a constant pruning percentage d throughout the iterations. In this hacker role, we experiment decaying pruning to obtain better winning tickets (or sparse network) of the model.
 
   * Decayed pruning is implemented by reducing the pruning percentage by a factor (prune_factor) at every pruning iteration.
   
@@ -28,9 +28,9 @@ Link: [Audio Lottery: Speech Recognition Made Ultra-Lightweight, Noise-Robust, a
 
   * We also experiment layerwise pruning to obtain informtaion rich winning tickets of the model.
   
-  * In the LTH Confomer code, we incoporate this by modifying just the [pruning_utils.py](https://github.com/SonaSimon42/ASR_Audio_Lottery/blob/main/Layerwise%20Pruning/pruning_utils.py) file (lines 20-42). We divide the prunable layers of the conformar model into three sets namely initial, middle and final layers. We then invoke ***l1unstructured*** with different pruning amounts for each set. We define these prune amounts to be {1.1, 1, 0.9} times the prune_percentage(d) for {initial, middle, final} layers repectively, so that a total d% is pruned from the entire model. 
+  * In the LTH Confomer code, we incoporate this by modifying just the [pruning_utils.py](https://github.com/SonaSimon42/ASR_Audio_Lottery/blob/main/Layerwise%20Pruning/pruning_utils.py) file (lines 20-42). We divide the prunable layers of the conformer model into three sets namely initial, middle and final layers. We then invoke ***prune.l1unstructured*** with different pruning amounts for each set. We define these prune amounts to be {1.1, 1, 0.9} times the prune_percentage(d) for {initial, middle, final} layers repectively, so that a total d% is pruned from the entire model. 
   
-  * Layerwise pruning help us to avoid noisy information by pruning more in the initial layer and focus on more rich information by pruning less in towards the final layers.
+  * Layerwise pruning help us to avoid noisy information by pruning more in the initial layer and obtain information rich parameters by pruning less in towards the final layers.
 
 
 ## Reference
