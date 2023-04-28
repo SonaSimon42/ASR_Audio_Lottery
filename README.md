@@ -13,9 +13,9 @@ Lightweight speech recognition models have seen explosive demands owing to a gro
 Link: [Audio Lottery: Speech Recognition Made Ultra-Lightweight, Noise-Robust, and Transferable](https://openreview.net/pdf?id=9Nk6AJkVYB)
 
 ## Codes explored
-* Implementation of LTH on Conformer backbone. 
-* Decaying Pruning
-* Layerwise Pruning
+* Implementation of LTH on Conformer backbone provided by the authors
+* Decaying Pruning: The LTH algorithm does iterative pruning with pruning percentage d contstant throughout the iterations. In this hacker role, we experiment decaying pruning to obtain better winning tickets (or sparse network) of the model. Decayed pruning is done by reducing the pruning percentage  by a factor (prune_factor) at the number of iterations increases.  
+* Layerwise Pruning: 
 
 
 ## Reference
