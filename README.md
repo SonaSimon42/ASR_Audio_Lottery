@@ -15,20 +15,20 @@ Link: [Audio Lottery: Speech Recognition Made Ultra-Lightweight, Noise-Robust, a
 ## Codes explored
 * Implementation of LTH on Conformer backbone provided by the authors. Link can be found [here](). 
 
-* **[Decaying Pruning]()**:
+* **[Decaying Pruning](https://github.com/SonaSimon42/ASR_Audio_Lottery/tree/main/Decaying%20Pruning)**:
 
   * The LTH algorithm does iterative pruning with the pruning percentage d, contstant throughout the iterations. In this hacker role, we experiment decaying pruning to obtain better winning tickets (or sparse network) of the model.
 
   * Decayed pruning is implemented by reducing the pruning percentage by a factor (prune_factor) at every pruning iteration.
   
-  * In the LTH Confomer code, we incoporate this by modifying the [main_lth.py]() file (line 110). We also need to modify the config file ie, [EfficientConformerCTCLargeLTH.json]() to incoporate the new "prune_factor" parameter. 
+  * In the LTH Confomer code, we incoporate this by modifying the [main_lth.py](https://github.com/SonaSimon42/ASR_Audio_Lottery/blob/main/Decaying%20Pruning/main_lth.py) file (line 110). We also need to modify the config file ie, [EfficientConformerCTCLargeLTH.json](https://github.com/SonaSimon42/ASR_Audio_Lottery/blob/main/Decaying%20Pruning/EfficientConformerCTCLargeLTH.json) to incoporate the new "prune_factor" parameter. 
 
 
-* **[Layerwise Pruning](Layerwise Pruning)**: 
+* **[Layerwise Pruning](https://github.com/SonaSimon42/ASR_Audio_Lottery/tree/main/Layerwise%20Pruning)**: 
 
   * We also experiment layerwise pruning to obtain informtaion rich winning tickets of the model.
   
-  * In the LTH Confomer code, we incoporate this by modifying just the [main_lth.py]() file (line 110). We divide the prunable layers of the conformar model into three sets namely initial, middle and final layers. We then invoke ***l1unstructured*** with different pruning amounts for each set. We define these prune amounts to be {1.1, 1, 0.9} times the prune_percentage(d) for {initial, middle, final} layers repectively, so that a total d% is pruned from the entire model. 
+  * In the LTH Confomer code, we incoporate this by modifying just the [pruning_utils.py](https://github.com/SonaSimon42/ASR_Audio_Lottery/blob/main/Layerwise%20Pruning/pruning_utils.py) file (lines 20-42). We divide the prunable layers of the conformar model into three sets namely initial, middle and final layers. We then invoke ***l1unstructured*** with different pruning amounts for each set. We define these prune amounts to be {1.1, 1, 0.9} times the prune_percentage(d) for {initial, middle, final} layers repectively, so that a total d% is pruned from the entire model. 
   
   * Layerwise pruning help us to avoid noisy information by pruning more in the initial layer and focus on more rich information by pruning less in towards the final layers.
 
