@@ -179,37 +179,3 @@ class ModelCTC(Model):
 
         # Decode Sequences
         return self.tokenizer.decode(batch_pred_list)
-
-class InterCTC(ModelCTC):
-
-    def __init__(self, encoder_params, tokenizer_params, training_params, decoding_params, name):
-        super(ModelCTC, self).__init__(tokenizer_params, training_params, name)
-
-        # Update Encoder Params
-        encoder_params["vocab_size"] = tokenizer_params["vocab_size"]
-
-        # Encoder
-        if encoder_params["arch"] == "Conformer":
-            self.encoder = ConformerEncoderInterCTC(encoder_params)
-
-        # FC Layer
-        self.fc = nn.Linear(encoder_params["dim_model"][-1] if isinstance(encoder_params["dim_model"], list) else encoder_params["dim_model"], tokenizer_params["vocab_size"])
-
-        # Criterion
-        self.criterion = LossInterCTC(training_params["interctc_lambda"])
-
-        # Compile
-        self.compile(training_params)
-
-    def forward(self, batch):
-
-        # Unpack Batch
-        x, _, x_len, _ = batch
-
-        # Forward Encoder (B, Taud) -> (B, T, Denc)
-        logits, logits_len, attentions, interctc_logits = self.encoder(x, x_len)
-
-        # FC Layer (B, T, Denc) -> (B, T, V)
-        logits = self.fc(logits)
-
-        return logits, logits_len, attentions, interctc_logits
